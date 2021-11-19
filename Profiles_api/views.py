@@ -6,6 +6,8 @@ from rest_framework import viewsets
 from Profiles_api import models
 from rest_framework.authentication import TokenAuthentication
 from Profiles_api import permissions
+from rest_framework import filters
+
 
 """ Declaracion de las vistas API """
 
@@ -90,3 +92,5 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = models.UserProfile.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes = (permissions.UpdateOwnProfile,)
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', 'email',)
